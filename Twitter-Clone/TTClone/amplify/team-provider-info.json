@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ttclone-dev-91617-authRole",
+      "UnauthRoleArn": "arn:aws:iam::532962690618:role/amplify-ttclone-dev-91617-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::532962690618:role/amplify-ttclone-dev-91617-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-ttclone-dev-91617-deployment",
+      "UnauthRoleName": "amplify-ttclone-dev-91617-unauthRole",
+      "StackName": "amplify-ttclone-dev-91617",
+      "StackId": "arn:aws:cloudformation:us-east-2:532962690618:stack/amplify-ttclone-dev-91617/ffcd1910-f93f-11ec-a343-0a5b70fe4516",
+      "AmplifyAppId": "d3dx6tuwnfskjg"
+    },
+    "categories": {
+      "auth": {
+        "ttclone605f32e0": {}
+      }
+    }
+  }
+}
