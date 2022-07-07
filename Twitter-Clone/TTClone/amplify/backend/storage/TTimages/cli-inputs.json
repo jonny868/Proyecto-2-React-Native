@@ -1,0 +1,13 @@
+{
+  "resourceName": "TTimages",
+  "policyUUID": "5cf22679",
+  "bucketName": "ttclone8f87ab857d1c44f298f80e66a3d2f233",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

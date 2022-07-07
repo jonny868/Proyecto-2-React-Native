@@ -5,29 +5,24 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listTweets } from "../../graphql/queries";
 
 const Feed = () => {
-
   const [tweets, setTweets] = useState<any>([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const fetchTweet = async () => {
     //get tweets from backend and set to state
     try {
-              const tweetsData: any = await API.graphql(graphqlOperation(listTweets));
-      setTweets(tweetsData.data.listTweets.items)
-      console.log(tweetsData)
+      const tweetsData: any = await API.graphql(graphqlOperation(listTweets));
+      setTweets(tweetsData.data.listTweets.items);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
-    finally {
-      setLoading(false)
-    }
-  }
+  };
 
   useEffect(() => {
-    
     fetchTweet();
-  }, [])
-  
+  }, []);
 
   return (
     <View style={{ backgroundColor: "red", width: "100%" }}>

@@ -93,6 +93,16 @@ export const onCreateTweet = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      likes {
+        items {
+          id
+          userID
+          tweetID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -117,6 +127,16 @@ export const onUpdateTweet = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      likes {
+        items {
+          id
+          userID
+          tweetID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -140,6 +160,118 @@ export const onDeleteTweet = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      likes {
+        items {
+          id
+          userID
+          tweetID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLike = /* GraphQL */ `
+  subscription OnCreateLike {
+    onCreateLike {
+      id
+      userID
+      tweetID
+      user {
+        items {
+          id
+          username
+          email
+          name
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tweet {
+        items {
+          id
+          content
+          userID
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLike = /* GraphQL */ `
+  subscription OnUpdateLike {
+    onUpdateLike {
+      id
+      userID
+      tweetID
+      user {
+        items {
+          id
+          username
+          email
+          name
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tweet {
+        items {
+          id
+          content
+          userID
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLike = /* GraphQL */ `
+  subscription OnDeleteLike {
+    onDeleteLike {
+      id
+      userID
+      tweetID
+      user {
+        items {
+          id
+          username
+          email
+          name
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tweet {
+        items {
+          id
+          content
+          userID
+          image
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt

@@ -18,18 +18,20 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeNavigatorParamList, RootTabParamList } from "../types";
 import { User } from "../API";
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { ColorSchemeName, Pressable } from "react-native";
+import { ColorSchemeName, Pressable, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import TabOneScreen from "../screens/HomeScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import LinkingConfiguration from "./LinkingConfiguration";
 import ProfilePicture from "../components/ProfilePicture";
 import NewTweetScreen from "../screens/NewTweetScreen";
 import { getUser } from "../graphql/queries";
 import React from "react";
+import {useNavigation} from "@react-navigation/native";
 
 export default function Navigation({
   colorScheme,
@@ -55,6 +57,10 @@ const Stack = createNativeStackNavigator<HomeNavigatorParamList>();
 function HomeNavigator() {
   const [user, setUser] = useState<User>();
   
+  const navigator = useNavigation();
+  const profile = () => {
+    navigator.navigate("ProfileScreen")
+  }
   useEffect(() => {
     //get current User
     const fetchUser = async () => {
@@ -96,10 +102,13 @@ function HomeNavigator() {
             />
           ),
           headerLeft: () => (
-            <ProfilePicture
-              image={user?.image || 'https://res.cloudinary.com/comicseries/image/upload/v1649827898/imgThumb_svogrq.png'}
-              size={40}
-            />
+            <TouchableOpacity onPress={profile}>
+              <ProfilePicture
+                image={user?.image || 'https://res.cloudinary.com/comicseries/image/upload/v1649827898/imgThumb_svogrq.png'}
+                size={40}
+              />
+            </TouchableOpacity>
+              
           ),
           headerTitleAlign: "center",
         }}
@@ -109,6 +118,12 @@ function HomeNavigator() {
         component={NewTweetScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      
     </Stack.Navigator>
   );
 }
@@ -134,7 +149,7 @@ function BottomTabNavigator() {
         name="Home"
         component={TabOneScreen}
         options={{
-          title: "Tab Two",
+          title: "Home",
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
