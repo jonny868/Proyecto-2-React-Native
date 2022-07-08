@@ -20,6 +20,7 @@
    NotFound: undefined;
    HomeScreen: undefined;
    NewTweet: undefined;
+   ProfileScreen: undefined
  };
  
  export type RootStackScreenProps<Screen extends keyof HomeNavigatorParamList> = NativeStackScreenProps<
@@ -47,13 +48,12 @@
  }
  
  export type TweetType = {
-   id: string
-   createdAt: string
-   user: UserType
-   content: string
-   image?: string
-   numberOfComments?: number
-   numberOfRetweets?: number
-   numberOfLikes?: number
- }
- 
+  id: string,
+  createdAt: string,
+  user: UserType,
+  content: string,
+  image?: string,
+  numberOfComments?: number,
+  numberOfRetweets?: number,
+  numberOfLikes?: number,
+}
