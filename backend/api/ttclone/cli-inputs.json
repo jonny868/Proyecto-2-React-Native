@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "ttclone",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\jonny\\Desktop\\TTClone\\amplify\\backend\\api\\ttclone\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

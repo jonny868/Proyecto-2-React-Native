@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "ttclone",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-ttclone-dev-91617-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/73e8b83f69c36669cb787e1f9816eef3752154d9"
+}

@@ -1,0 +1,291 @@
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  name: String!
+  image: String
+  tweets(id: ModelIDKeyConditionInput, filter: ModelTweetFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTweetConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Tweet {
+  id: ID!
+  content: String!
+  userID: ID!
+  image: String
+  user: User
+  likes(tweetID: ModelIDKeyConditionInput, filter: ModelLikeFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelLikeConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Like {
+  id: ID!
+  userID: ID!
+  tweetID: ID!
+  user(filter: ModelUserFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelUserConnection
+  tweet(filter: ModelTweetFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTweetConnection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserConnection {
+  items: [User]!
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  email: ModelStringInput
+  name: ModelStringInput
+  image: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getTweet(id: ID!): Tweet
+  listTweets(id: ID, filter: ModelTweetFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelTweetConnection
+}
+
+input ModelUserConditionInput {
+  username: ModelStringInput
+  email: ModelStringInput
+  name: ModelStringInput
+  image: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  email: String!
+  name: String!
+  image: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+  name: String
+  image: String
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
+  createTweet(input: CreateTweetInput!, condition: ModelTweetConditionInput): Tweet
+  updateTweet(input: UpdateTweetInput!, condition: ModelTweetConditionInput): Tweet
+  deleteTweet(input: DeleteTweetInput!, condition: ModelTweetConditionInput): Tweet
+  createLike(input: CreateLikeInput!, condition: ModelLikeConditionInput): Like
+  updateLike(input: UpdateLikeInput!, condition: ModelLikeConditionInput): Like
+  deleteLike(input: DeleteLikeInput!, condition: ModelLikeConditionInput): Like
+}
+
+type Subscription {
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreateTweet: Tweet @aws_subscribe(mutations: ["createTweet"])
+  onUpdateTweet: Tweet @aws_subscribe(mutations: ["updateTweet"])
+  onDeleteTweet: Tweet @aws_subscribe(mutations: ["deleteTweet"])
+  onCreateLike: Like @aws_subscribe(mutations: ["createLike"])
+  onUpdateLike: Like @aws_subscribe(mutations: ["updateLike"])
+  onDeleteLike: Like @aws_subscribe(mutations: ["deleteLike"])
+}
+
+type ModelTweetConnection {
+  items: [Tweet]!
+  nextToken: String
+}
+
+input ModelTweetFilterInput {
+  id: ModelIDInput
+  content: ModelStringInput
+  userID: ModelIDInput
+  image: ModelStringInput
+  and: [ModelTweetFilterInput]
+  or: [ModelTweetFilterInput]
+  not: ModelTweetFilterInput
+}
+
+input ModelTweetConditionInput {
+  content: ModelStringInput
+  userID: ModelIDInput
+  image: ModelStringInput
+  and: [ModelTweetConditionInput]
+  or: [ModelTweetConditionInput]
+  not: ModelTweetConditionInput
+}
+
+input CreateTweetInput {
+  id: ID
+  content: String!
+  userID: ID!
+  image: String
+}
+
+input UpdateTweetInput {
+  id: ID!
+  content: String
+  userID: ID
+  image: String
+}
+
+input DeleteTweetInput {
+  id: ID!
+}
+
+input ModelLikeConditionInput {
+  userID: ModelIDInput
+  tweetID: ModelIDInput
+  and: [ModelLikeConditionInput]
+  or: [ModelLikeConditionInput]
+  not: ModelLikeConditionInput
+}
+
+input CreateLikeInput {
+  id: ID
+  userID: ID!
+  tweetID: ID!
+}
+
+input UpdateLikeInput {
+  id: ID!
+  userID: ID
+  tweetID: ID
+}
+
+input DeleteLikeInput {
+  id: ID!
+}
+
+input ModelIDKeyConditionInput {
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+type ModelLikeConnection {
+  items: [Like]!
+  nextToken: String
+}
+
+input ModelLikeFilterInput {
+  id: ModelIDInput
+  userID: ModelIDInput
+  tweetID: ModelIDInput
+  and: [ModelLikeFilterInput]
+  or: [ModelLikeFilterInput]
+  not: ModelLikeFilterInput
+}
+
